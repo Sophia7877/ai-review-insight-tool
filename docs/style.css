@@ -222,8 +222,6 @@ h1 {
 .conversion-grid article,
 .growth-map,
 .growth-grid article,
-.jd-fit,
-.fit-grid article,
 .template-lab,
 .template-card,
 .outcome-wall,
@@ -324,49 +322,6 @@ li,
   padding: 22px;
   background:
     linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
-}
-
-.jd-fit {
-  margin-bottom: 20px;
-  padding: 22px;
-  border-color: #cfe0f8;
-  background:
-    linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-}
-
-.text-link {
-  color: var(--blue);
-  font-size: 14px;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.fit-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-.fit-grid article {
-  padding: 16px;
-  background: #ffffff;
-}
-
-.fit-grid strong,
-.fit-grid span {
-  display: block;
-}
-
-.fit-grid strong {
-  margin-bottom: 8px;
-  color: var(--blue-3);
-  font-size: 15px;
-}
-
-.fit-grid span {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.55;
 }
 
 .template-grid {
@@ -768,7 +723,6 @@ li {
   .grid,
   .workflow,
   .scenario-strip,
-  .fit-grid,
   .template-grid,
   .conversion-grid,
   .growth-grid,
