@@ -9,6 +9,39 @@ const sampleReviews = [
   "效果确实有，但是价格对学生党不太友好，希望出小样装",
 ];
 
+const templates = {
+  launch: [
+    "成分表写得很清楚，核心成分看起来很安心，会回购",
+    "新品质地比旧版更好吸收，肤感轻薄不黏",
+    "包装设计很高级，送朋友也拿得出手",
+    "用了三天有点泛红，不确定敏感肌能不能继续用",
+    "详情页没有写清楚适合什么肤质，希望说明更具体",
+    "效果确实有，但价格比预期高，想等活动再买",
+    "客服解释成分挺耐心，但回复速度有点慢",
+    "如果有小样装会更愿意先试一下",
+  ],
+  campaign: [
+    "大促价格比平时划算，但赠品规则看了半天没看懂",
+    "满减之后确实便宜，会考虑囤货",
+    "页面写的优惠和下单页不一致，有点影响信任",
+    "物流太慢了，活动结束一周才收到",
+    "客服排队很久，问赠品问题没人及时回复",
+    "组合装很适合老用户，但新用户不知道该怎么选",
+    "价格不错，希望能直接写清楚到手价",
+    "活动说明太复杂，差点放弃下单",
+  ],
+  negative: [
+    "用了两周脸有点泛红，想知道是不是不适合敏感肌",
+    "客服回复很慢，退换货流程也不清楚",
+    "价格偏贵，如果没有小样不敢直接买正装",
+    "包装收到有压痕，送人会有点尴尬",
+    "详情页没写清楚使用频率，新手不知道怎么用",
+    "物流慢，等了快一周才到",
+    "成分看起来不错，但担心和其他产品叠加会刺激",
+    "希望直播间能直接讲清楚适用人群和避雷点",
+  ],
+};
+
 const sentimentList = document.querySelector("#sentimentList");
 const themeList = document.querySelector("#themeList");
 const painList = document.querySelector("#painList");
@@ -114,6 +147,22 @@ function analyze() {
 document.querySelector("#loadSample").addEventListener("click", () => {
   reviewInput.value = sampleReviews.join("\n");
   analyze();
+});
+
+document.querySelector("#startDemo").addEventListener("click", () => {
+  reviewInput.value = templates.launch.join("\n");
+  analyze();
+  document.querySelector("#demoWorkspace").scrollIntoView({ behavior: "smooth" });
+});
+
+document.querySelectorAll(".template-card").forEach((button) => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".template-card").forEach((item) => item.classList.remove("active"));
+    button.classList.add("active");
+    reviewInput.value = templates[button.dataset.template].join("\n");
+    analyze();
+    document.querySelector("#demoWorkspace").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 });
 
 document.querySelector("#analyzeButton").addEventListener("click", analyze);
