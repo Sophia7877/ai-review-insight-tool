@@ -144,7 +144,9 @@ h1 {
 .advice,
 .workflow div,
 .conversion-map,
-.conversion-grid article {
+.conversion-grid article,
+.growth-map,
+.growth-grid article {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
@@ -233,23 +235,41 @@ li,
   background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
 }
 
-.conversion-map .panel-title {
+.growth-map {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fffc 100%);
+}
+
+.conversion-map .panel-title,
+.growth-map .panel-title {
   margin-bottom: 16px;
 }
 
-.conversion-grid {
+.conversion-grid,
+.growth-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
-.conversion-grid article {
+.conversion-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.growth-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.conversion-grid article,
+.growth-grid article {
   padding: 16px;
 }
 
 .conversion-grid span,
 .conversion-grid strong,
-.conversion-grid p {
+.conversion-grid p,
+.growth-grid strong,
+.growth-grid p {
   display: block;
 }
 
@@ -267,6 +287,19 @@ li,
 }
 
 .conversion-grid p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.growth-grid strong {
+  margin-bottom: 8px;
+  color: var(--green);
+  font-size: 15px;
+}
+
+.growth-grid p {
   margin-bottom: 0;
   color: var(--muted);
   font-size: 14px;
@@ -465,7 +498,8 @@ li {
   .grid,
   .workflow,
   .scenario-strip,
-  .conversion-grid {
+  .conversion-grid,
+  .growth-grid {
     grid-template-columns: 1fr;
   }
 }
