@@ -2,7 +2,7 @@
 
 ## 目的
 
-让 HR 或面试官不用下载代码，也能直接打开 Demo 页面理解项目。
+让业务同学不用下载代码，也能直接打开 Demo 页面理解项目。
 
 ## 推荐设置
 
@@ -23,16 +23,16 @@
 
 6. 保存后等待 GitHub 生成访问链接。
 
-## 简历链接写法
+## 展示链接
 
-如果 GitHub Pages 开启成功，可以在简历中写：
+如果 GitHub Pages 开启成功，可以使用：
 
 ```text
 GitHub: github.com/Sophia7877/ai-review-insight-tool
 Demo: Sophia7877.github.io/ai-review-insight-tool
 ```
 
-如果没有开启 Pages，只写 GitHub 仓库链接也可以。
+如果没有开启 Pages，只使用 GitHub 仓库链接也可以。
 
 ## 展示时怎么讲
 

@@ -56,9 +56,9 @@
 
 - **真实业务场景**：围绕品牌/电商运营中的评论分析、竞品监测、用户痛点提炼和内容选题展开。
 - **AI 产品运营导向**：不仅输出情绪分类，还设计了“输入-分析-洞察-采纳-复盘”的完整运营工作流。
-- **开箱即用**：支持无 API Key 的演示模式，HR 或面试官 clone 后可以直接跑通。
+- **开箱即用**：支持无 API Key 的演示模式，业务同学 clone 后可以直接跑通。
 - **可扩展 AI 模式**：支持接入 Claude API，将本地规则替换为真实大模型语义分析。
-- **简历友好**：项目结构包含 PRD、用户画像、指标体系、Prompt 模板和简历项目描述。
+- **运营交付完整**：项目结构包含 PRD、用户画像、指标体系、Prompt 模板、案例复盘和运营转化链路。
 - **产品化展示**：提供本地 Demo 看板、案例复盘、竞品分析和 30 天迭代路线图，展示从工具到产品的运营思考。
 - **可导出交付物**：Demo 支持上传评论文件、复制周报总结、下载 Markdown 周报和 JSON 数据。
 
@@ -98,8 +98,7 @@ ai-review-insight-tool/
 │   ├── operation-loop.md
 │   ├── product-roadmap.md
 │   ├── experiment-plan.md
-│   ├── review-rubric.md
-│   └── resume-summary.md
+│   └── review-rubric.md
 └── demo/
     ├── index.html
     ├── style.css
@@ -164,7 +163,7 @@ Demo 展示评论输入、情绪统计、痛点归类、卖点提取、内容选
 | --- | --- |
 | `output/insight_report.md` | 给运营/品牌经理看的 Markdown 洞察报告 |
 | `output/insight_data.json` | 给后续看板、后台或产品原型使用的结构化数据 |
-| `demo/index.html` | 给 HR 或面试官快速理解项目价值的本地 Demo，支持上传和导出 |
+| `demo/index.html` | 给业务同学快速理解项目价值的本地 Demo，支持上传和导出 |
 | `docs/index.html` | GitHub Pages 在线 Demo 入口 |
 
 ## 产品运营交付物
@@ -179,8 +178,8 @@ Demo 展示评论输入、情绪统计、痛点归类、卖点提取、内容选
 - [运营转化链路](docs/operation-loop.md)：从用户反馈到购买转化动作的完整拆解
 - [产品路线图](docs/product-roadmap.md)：30 天迭代计划和版本规划
 - [实验计划](docs/experiment-plan.md)：首次使用、内容选题、人工复核三类实验设计
-- [AI 输出复核标准](docs/review-rubric.md)：判断 AI 洞察是否可采纳
 - [GitHub Pages 展示说明](docs/github-pages.md)：将 Demo 发布成在线展示页
+- [AI 输出复核标准](docs/review-rubric.md)：判断 AI 洞察是否可采纳
 
 ## 示例输出
 
@@ -195,18 +194,6 @@ Demo 展示评论输入、情绪统计、痛点归类、卖点提取、内容选
 完整报告见：[`output/insight_report.md`](output/insight_report.md)
 
 结构化数据见：[`output/insight_data.json`](output/insight_data.json)
-
-## 简历可用描述
-
-**AI 产品运营项目｜AI Review Insight Tool 消费者评论洞察工具**
-
-- 独立设计面向品牌与电商运营场景的 AI 消费者评论洞察工具，识别用户购买动机、流失阻碍、高频痛点和可放大卖点，并转化为内容选题、详情页优化和客服 FAQ。
-- 结合品牌运营与电商运营场景，设计“评论导入-AI 分析-购买动机提炼-人工复核-运营采纳-指标复盘”的工作流，并补充实验计划和 AI 输出复核标准。
-- 搭建产品运营指标体系与本地 Demo，支持周报复制、Markdown 报告下载和 JSON 数据导出，围绕洞察采纳率、内容选题转化率、详情页优化采纳率和 7 日复用率评估 AI 工具的业务价值。
-
-## 面试讲法
-
-这个项目不是算法训练，而是 AI 产品运营项目。我选择消费者评论分析这个场景，是因为运营的核心是吸引用户选择自家产品，而用户评论里正好包含“为什么买”和“为什么不买”的真实原因。我设计了一个 AI 工作流，把评论转化为购买动机、流失阻碍、可放大卖点、内容选题和运营建议，再通过人工复核和指标体系判断这些洞察是否真的能进入详情页、内容排期、客服 FAQ 和活动复盘。
 
 ## 数据说明
 
