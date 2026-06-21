@@ -189,6 +189,38 @@ li,
   margin-bottom: 20px;
 }
 
+.scenario-strip {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr 1.35fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.scenario-strip div {
+  border: 1px solid #cfe0f8;
+  border-radius: 8px;
+  padding: 15px 16px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 10px 30px rgba(23, 32, 42, 0.06);
+}
+
+.scenario-strip strong,
+.scenario-strip span {
+  display: block;
+}
+
+.scenario-strip strong {
+  margin-bottom: 6px;
+  color: var(--blue);
+  font-size: 14px;
+}
+
+.scenario-strip span {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .workflow div {
   padding: 15px 16px;
 }
@@ -383,7 +415,8 @@ li {
   .workspace,
   .metrics,
   .grid,
-  .workflow {
+  .workflow,
+  .scenario-strip {
     grid-template-columns: 1fr;
   }
 }
