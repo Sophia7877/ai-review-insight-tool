@@ -33,10 +33,14 @@
         <aside class="panel">
           <div class="panel-title">
             <h2>评论输入</h2>
-            <button id="loadSample">加载示例</button>
+            <button id="loadSample" type="button">加载示例</button>
           </div>
+          <label class="file-control">
+            上传 CSV 或 TXT
+            <input id="fileInput" type="file" accept=".csv,.txt" />
+          </label>
           <textarea id="reviewInput" rows="15"></textarea>
-          <button class="primary" id="analyzeButton">生成洞察</button>
+          <button class="primary" id="analyzeButton" type="button">生成洞察</button>
         </aside>
 
         <section class="panel">
@@ -73,7 +77,11 @@
           <section class="advice">
             <h3>运营建议</h3>
             <p id="adviceText"></p>
-            <button id="copySummary" type="button">复制周报总结</button>
+            <div class="actions">
+              <button id="copySummary" type="button">复制周报总结</button>
+              <button id="downloadReport" type="button">下载周报.md</button>
+              <button id="downloadJson" type="button">下载JSON</button>
+            </div>
           </section>
         </section>
       </section>
