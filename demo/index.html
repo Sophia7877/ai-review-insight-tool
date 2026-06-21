@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Review Insight Tool</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">AI Product Operations Demo</p>
+          <h1>AI Review Insight Tool</h1>
+          <p>把消费者评论转化为运营洞察、内容选题和复盘指标。</p>
+        </div>
+        <div class="metrics">
+          <div><strong id="reviewCount">25</strong><span>评论样本</span></div>
+          <div><strong id="painCount">6</strong><span>高频主题</span></div>
+          <div><strong id="topicCount">4</strong><span>选题建议</span></div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="panel">
+          <div class="panel-title">
+            <h2>评论输入</h2>
+            <button id="loadSample">加载示例</button>
+          </div>
+          <textarea id="reviewInput" rows="15"></textarea>
+          <button class="primary" id="analyzeButton">生成洞察</button>
+        </aside>
+
+        <section class="panel">
+          <div class="panel-title">
+            <h2>运营洞察看板</h2>
+            <span class="badge">HR 可读版</span>
+          </div>
+          <div class="grid">
+            <article>
+              <h3>情绪分布</h3>
+              <ul id="sentimentList"></ul>
+            </article>
+            <article>
+              <h3>高频主题</h3>
+              <ul id="themeList"></ul>
+            </article>
+            <article>
+              <h3>代表性痛点</h3>
+              <ul id="painList"></ul>
+            </article>
+            <article>
+              <h3>内容选题</h3>
+              <ul id="contentList"></ul>
+            </article>
+          </div>
+          <section class="advice">
+            <h3>运营建议</h3>
+            <p id="adviceText"></p>
+          </section>
+        </section>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

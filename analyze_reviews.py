@@ -22,12 +22,12 @@ import argparse
 import csv
 import json
 import os
-import sys
-from collections import Counter, defaultdict
+from collections import Counter
 from datetime import datetime
 
-DATA_PATH = os.path.join(os.path.dirname(__file__), "data", "sample_reviews.csv")
-OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "output", "insight_report.md")
+ROOT_DIR = os.path.dirname(__file__)
+DEFAULT_DATA_PATH = os.path.join(ROOT_DIR, "data", "sample_reviews.csv")
+DEFAULT_OUTPUT_PATH = os.path.join(ROOT_DIR, "output", "insight_report.md")
 
 # 用于demo模式的关键词词典（无需调用AI，纯本地规则，方便没有API Key时也能跑通整个流程）
 THEME_KEYWORDS = {
@@ -118,15 +118,17 @@ def generate_summary_demo(sentiment_counter, theme_counter, sample_pain_points):
     )
 
 
-def run(demo: bool):
-    reviews = load_reviews(DATA_PATH)
+def run(demo: bool, input_path: str, output_path: str):
+    reviews = load_reviews(input_path)
+    if not reviews:
+        raise ValueError("输入文件中没有可分析的评论数据。")
+
     sentiment_counter = Counter()
     theme_counter = Counter()
     pain_points = []
-    theme_examples = defaultdict(list)
 
     client = None
-    model = "claude-sonnet-4-6"
+    model = os.environ.get("ANTHROPIC_MODEL", "claude-3-5-sonnet-latest")
     if not demo:
         try:
             import anthropic
@@ -152,7 +154,6 @@ def run(demo: bool):
         sentiment_counter[sentiment] += 1
         for t in themes:
             theme_counter[t] += 1
-            theme_examples[t].append(text)
         if pain_point:
             pain_points.append(pain_point)
 
@@ -161,11 +162,29 @@ def run(demo: bool):
     else:
         summary = generate_summary_ai(client, model, sentiment_counter, theme_counter, pain_points)
 
-    write_report(reviews, sentiment_counter, theme_counter, pain_points, summary, demo)
+    content_topics = generate_content_topics(theme_counter, pain_points)
+    write_report(reviews, sentiment_counter, theme_counter, pain_points, summary, content_topics, demo, output_path)
 
 
-def write_report(reviews, sentiment_counter, theme_counter, pain_points, summary, demo):
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+def generate_content_topics(theme_counter, pain_points):
+    """把评论主题转化为运营可用的内容选题。"""
+    topics = []
+    top_themes = [theme for theme, _ in theme_counter.most_common(3)]
+    if "成分透明度" in top_themes:
+        topics.append("小红书选题：护肤品成分表到底怎么看？用用户真实评论讲清楚安全感")
+    if "价格/性价比" in top_themes:
+        topics.append("抖音选题：大促怎么买才不亏？用价格/组合装评论做决策指南")
+    if "产品效果" in top_themes:
+        topics.append("公众号选题：用户最在意的效果反馈是什么？从评论看功效表达机会")
+    if "客服体验" in top_themes or "物流配送" in top_themes:
+        topics.append("运营复盘选题：负反馈不只来自产品，也来自客服、物流和规则表达")
+    if pain_points and len(topics) < 4:
+        topics.append("直播话术选题：把用户最常问的痛点整理成 FAQ，降低购买顾虑")
+    return topics[:5]
+
+
+def write_report(reviews, sentiment_counter, theme_counter, pain_points, summary, content_topics, demo, output_path):
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     lines = []
     lines.append("# AI消费者评论洞察报告")
     lines.append("")
@@ -192,11 +211,23 @@ def write_report(reviews, sentiment_counter, theme_counter, pain_points, summary
     lines.append("")
     lines.append(summary)
     lines.append("")
+    lines.append("## 五、内容运营选题建议")
+    lines.append("")
+    for topic in content_topics:
+        lines.append(f"- {topic}")
+    lines.append("")
+    lines.append("## 六、运营指标建议")
+    lines.append("")
+    lines.append("- 洞察采纳率：生成洞察中被周报、Brief 或复盘采用的比例")
+    lines.append("- 内容选题转化率：AI 生成选题中被实际发布或进入排期的比例")
+    lines.append("- 人工修正率：需要运营人员重写或大幅修改的输出比例")
+    lines.append("- 7日复用率：同一运营人员7天内再次使用工具的比例")
+    lines.append("")
 
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
-    print(f"分析完成，报告已生成：{OUTPUT_PATH}")
+    print(f"分析完成，报告已生成：{output_path}")
     print("\n--- 洞察总结预览 ---")
     print(summary)
 
@@ -204,5 +235,7 @@ def write_report(reviews, sentiment_counter, theme_counter, pain_points, summary
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AI消费者评论洞察分析工具")
     parser.add_argument("--demo", action="store_true", help="使用本地规则演示模式，无需API Key")
+    parser.add_argument("--input", default=DEFAULT_DATA_PATH, help="输入CSV路径，默认 data/sample_reviews.csv")
+    parser.add_argument("--output", default=DEFAULT_OUTPUT_PATH, help="输出报告路径，默认 output/insight_report.md")
     args = parser.parse_args()
-    run(demo=args.demo)
+    run(demo=args.demo, input_path=args.input, output_path=args.output)
